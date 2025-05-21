@@ -1,20 +1,8 @@
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { FaCheck } from "react-icons/fa";
-import { IoClose, IoCloseCircle, IoGitCompareOutline } from "react-icons/io5";
-import { MdOutlineDelete, MdOutlineTimer } from "react-icons/md";
-import { SiGravatar } from "react-icons/si";
+import { CheckCheck, CircleX, UserRoundX } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -52,40 +40,25 @@ const ItemGame = ({
   handleAddSerie,
   toggleSerieCheck,
 }: Props) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: ex.id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
+  
 
   return (
-    <li
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      className="flex items-start justify-between rounded border p-3"
-    >
+    <li className="flex items-start justify-between rounded border p-3">
       <div className="flex w-full flex-col">
         <div className="flex w-full items-center justify-between">
           <div
-            {...listeners}
             className="flex w-full flex-row items-center gap-2"
           >
             <div className="flex w-1/6 flex-row items-center gap-2">
-              <IoGitCompareOutline
-                className="cursor-grab"
-                title="Reordenar"
-                size={30}
-              />
-              <SiGravatar className="rounded-full bg-primary p-2" size={40} />
+              
+              <CircleX className="rounded-full bg-primary p-2" size={40} />
             </div>
             <div className="w-5/6 text-sm">{ex.name}</div>
           </div>
           <div className="">
             <div className="flex flex-row items-center gap-3">
-              <IoCloseCircle
+            
+              <CircleX
                 onClick={() => handleRemoverExercise(ex.id)}
                 className="text-red-600"
                 size={40}
@@ -93,26 +66,7 @@ const ItemGame = ({
             </div>
           </div>
         </div>
-        <div className="my-2 flex w-full flex-row items-center gap-1 text-sm">
-          <MdOutlineTimer size={20} />
-          <Select
-            defaultValue={ex.interval?.toString()}
-            onValueChange={(value) =>
-              handleUpdateInterval(ex.id, Number(value))
-            }
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Tempo de Descanso: DESATIVADO" />
-            </SelectTrigger>
-            <SelectContent>
-              {restIterval.map((option) => (
-                <SelectItem value={option.value.toString()} key={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+
         <Table>
           <TableHeader>
             <TableRow>
@@ -121,10 +75,10 @@ const ItemGame = ({
               <TableHead>Assistências</TableHead>
               <TableHead>Defesas</TableHead>
               <TableHead>
-                <FaCheck />
+              <CheckCheck />
               </TableHead>
               <TableHead>
-                <MdOutlineDelete />
+              <CircleX />
               </TableHead>
             </TableRow>
           </TableHeader>

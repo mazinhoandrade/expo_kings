@@ -1421,6 +1421,7 @@ export namespace Prisma {
     image: string | null
     admin: boolean | null
     birthday: Date | null
+    monthlypayment: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1433,6 +1434,7 @@ export namespace Prisma {
     image: string | null
     admin: boolean | null
     birthday: Date | null
+    monthlypayment: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1445,6 +1447,7 @@ export namespace Prisma {
     image: number
     admin: number
     birthday: number
+    monthlypayment: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1459,6 +1462,7 @@ export namespace Prisma {
     image?: true
     admin?: true
     birthday?: true
+    monthlypayment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1471,6 +1475,7 @@ export namespace Prisma {
     image?: true
     admin?: true
     birthday?: true
+    monthlypayment?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1483,6 +1488,7 @@ export namespace Prisma {
     image?: true
     admin?: true
     birthday?: true
+    monthlypayment?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1568,6 +1574,7 @@ export namespace Prisma {
     image: string | null
     admin: boolean
     birthday: Date | null
+    monthlypayment: boolean
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1597,6 +1604,7 @@ export namespace Prisma {
     image?: boolean
     admin?: boolean
     birthday?: boolean
+    monthlypayment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -1613,6 +1621,7 @@ export namespace Prisma {
     image?: boolean
     admin?: boolean
     birthday?: boolean
+    monthlypayment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1625,6 +1634,7 @@ export namespace Prisma {
     image?: boolean
     admin?: boolean
     birthday?: boolean
+    monthlypayment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1637,11 +1647,12 @@ export namespace Prisma {
     image?: boolean
     admin?: boolean
     birthday?: boolean
+    monthlypayment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "admin" | "birthday" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "admin" | "birthday" | "monthlypayment" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -1666,6 +1677,7 @@ export namespace Prisma {
       image: string | null
       admin: boolean
       birthday: Date | null
+      monthlypayment: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2101,6 +2113,7 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly admin: FieldRef<"User", 'Boolean'>
     readonly birthday: FieldRef<"User", 'DateTime'>
+    readonly monthlypayment: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -8060,6 +8073,7 @@ export namespace Prisma {
     image: 'image',
     admin: 'admin',
     birthday: 'birthday',
+    monthlypayment: 'monthlypayment',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8238,6 +8252,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     admin?: BoolFilter<"User"> | boolean
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
+    monthlypayment?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
@@ -8253,6 +8268,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     admin?: SortOrder
     birthday?: SortOrderInput | SortOrder
+    monthlypayment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
@@ -8271,6 +8287,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     admin?: BoolFilter<"User"> | boolean
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
+    monthlypayment?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
@@ -8286,6 +8303,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     admin?: SortOrder
     birthday?: SortOrderInput | SortOrder
+    monthlypayment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -8304,6 +8322,7 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     admin?: BoolWithAggregatesFilter<"User"> | boolean
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    monthlypayment?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -8648,6 +8667,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -8663,6 +8683,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -8678,6 +8699,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -8693,6 +8715,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -8708,6 +8731,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8720,6 +8744,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8732,6 +8757,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9186,6 +9212,7 @@ export namespace Prisma {
     image?: SortOrder
     admin?: SortOrder
     birthday?: SortOrder
+    monthlypayment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9198,6 +9225,7 @@ export namespace Prisma {
     image?: SortOrder
     admin?: SortOrder
     birthday?: SortOrder
+    monthlypayment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9210,6 +9238,7 @@ export namespace Prisma {
     image?: SortOrder
     admin?: SortOrder
     birthday?: SortOrder
+    monthlypayment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10243,6 +10272,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -10257,6 +10287,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -10308,6 +10339,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -10322,6 +10354,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -10363,6 +10396,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -10377,6 +10411,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -10407,6 +10442,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -10421,6 +10457,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -10435,6 +10472,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -10449,6 +10487,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    monthlypayment?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -10479,6 +10518,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -10493,6 +10533,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput

@@ -5,6 +5,7 @@ export interface User {
     image: string;
     admin: boolean;
     birthday: Date;
+    monthlypayment: boolean;
     createdAt: Date;
     updatedAt: Date;
 }

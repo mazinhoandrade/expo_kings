@@ -15,18 +15,19 @@ datasource db {
 }
 
 model User {
-  id            String             @id @default(cuid())
-  name          String?
-  email         String             @unique
-  emailVerified DateTime?
-  image         String?
-  admin         Boolean            @default(false)
-  birthday      DateTime?
-  accounts      Account[]
-  sessions      Session[]
-  statistics    PlayerStatistics[]
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
+  id             String             @id @default(cuid())
+  name           String?
+  email          String             @unique
+  emailVerified  DateTime?
+  image          String?
+  admin          Boolean            @default(false)
+  birthday       DateTime?
+  monthlypayment Boolean            @default(false)
+  accounts       Account[]
+  sessions       Session[]
+  statistics     PlayerStatistics[]
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
 }
 
 model Game {
@@ -42,7 +43,7 @@ model PlayerStatistics {
   id          String   @id @default(cuid())
   user        User     @relation(fields: [userId], references: [id])
   userId      String
-  game        Game     @relation(fields: [gameId], references: [id])
+  game        Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId      String
   topcover    Int
   gols        Int

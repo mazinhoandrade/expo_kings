@@ -1,42 +1,34 @@
-import { Exercise } from "@/types/exercise";
-import { Serie } from "@/types/serie";
+import { Game } from "@/app/types/game";
+import { PlayerStatistics } from "@/app/types/playerStatistics";
 
 type Action =
   | {
-      type: "ADD_EXERCISE";
+      type: "ADD_PLAYER";
       payload: {
         name: string;
-        series: Serie[];
+        statistics: PlayerStatistics[];
         //obs: string
       };
     }
   | {
-      type: "UPDATE_EXERCISE";
+      type: "UPDATE_PLAYER";
       payload: { id: string; interval?: number };
     }
   | {
-      type: "REORDER_EXERCICIOS";
-      payload: Exercise[];
-    }
-  | {
-      type: "REMOVE_EXERCISE";
+      type: "REMOVE_PLAYER";
       payload: { id: string };
     }
   | {
-      type: "ADD_SERIE";
-      payload: { id: string };
-    }
-  | {
-      type: "REMOVE_SERIE";
+      type: "REMOVE_STATISTIC";
       payload: {
-        exerciseId: string;
+        PLAYERId: string;
         serieId: string;
       };
     }
   | {
-      type: "UPDATE_SERIE";
+      type: "UPDATE_STATISTIC";
       payload: {
-        exerciseId: string;
+        PLAYERId: string;
         serieId: string;
         repetitions: number;
         load: number;
@@ -45,15 +37,15 @@ type Action =
   | {
       type: "TOGGLE_SERIE_CHECK";
       payload: {
-        exerciseId: string;
+        PLAYERId: string;
         serieId: string;
         checked: boolean;
       };
     };
 
-export const GameReducer = (state: Exercise[], action: Action): Exercise[] => {
+export const GameReducer = (state: Game[], action: Action): Game[] => {
   switch (action.type) {
-    case "ADD_EXERCISE":
+    case "ADD_PLAYER":
       if (state.find((ex) => ex.name === action.payload.name)) {
         alert("Exercicio ja Adicionado");
         return state;
@@ -63,10 +55,10 @@ export const GameReducer = (state: Exercise[], action: Action): Exercise[] => {
         {
           id: crypto.randomUUID(),
           name: action.payload.name,
-          series: action.payload.series,
+          statistics: action.payload.statistics,
         },
       ];
-    case "UPDATE_EXERCISE":
+    case "UPDATE_PLAYER":
       return state.map((ex) => {
         if (ex.id === action.payload.id) {
           return {
@@ -76,58 +68,44 @@ export const GameReducer = (state: Exercise[], action: Action): Exercise[] => {
         }
         return ex;
       });
-    case "REORDER_EXERCICIOS":
-      return action.payload;
-    case "ADD_SERIE":
-      return state.map((ex) => {
-        if (ex.id === action.payload.id) {
-          const newSeries = {
-            id: crypto.randomUUID(),
-            series: ex.series.length + 1,
-            repetitions: ex.series[0] ? ex.series[0].repetitions : 0,
-            load: ex.series[0] ? ex.series[0].load : 0,
-          };
-          return {
-            ...ex,
-            series: [...ex.series, newSeries],
-          };
-        }
-        return ex;
-      });
-    case "REMOVE_SERIE":
-      return state.map((ex) => {
-        if (ex.id === action.payload.exerciseId) {
-          return {
-            ...ex,
-            series: ex.series.filter(
-              (serie) => serie.id !== action.payload.serieId,
-            ),
-          };
-        }
-        return ex;
-      });
-    case "UPDATE_SERIE":
-      return state.map((ex) => {
-        if (ex.id === action.payload.exerciseId) {
-          return {
-            ...ex,
-            interval: ex.interval,
-            series: ex.series.map((serie) =>
-              serie.id === action.payload.serieId
-                ? {
-                    ...serie,
-                    repetitions: action.payload.repetitions,
-                    load: action.payload.load,
-                  }
-                : serie,
-            ),
-          };
-        }
-        return ex;
-      });
+      case "REMOVE_PLAYER":
+      return state.filter((ex) => ex.id !== action.payload.id);
+    default:
+      return state;
+    // case "REMOVE_SERIE":
+    //   return state.map((ex) => {
+    //     if (ex.id === action.payload.PLAYERId) {
+    //       return {
+    //         ...ex,
+    //         series: ex.series.filter(
+    //           (serie) => serie.id !== action.payload.serieId,
+    //         ),
+    //       };
+    //     }
+    //     return ex;
+    //   });
+    // case "UPDATE_SERIE":
+    //   return state.map((ex) => {
+    //     if (ex.id === action.payload.PLAYERId) {
+    //       return {
+    //         ...ex,
+    //         interval: ex.interval,
+    //         series: ex.series.map((serie) =>
+    //           serie.id === action.payload.serieId
+    //             ? {
+    //                 ...serie,
+    //                 repetitions: action.payload.repetitions,
+    //                 load: action.payload.load,
+    //               }
+    //             : serie,
+    //         ),
+    //       };
+    //     }
+    //     return ex;
+    //   });
     case "TOGGLE_SERIE_CHECK":
       return state.map((ex) => {
-        if (ex.id === action.payload.exerciseId) {
+        if (ex.id === action.payload.PLAYERId) {
           return {
             ...ex,
             series: ex.series.map((serie) =>
@@ -142,9 +120,6 @@ export const GameReducer = (state: Exercise[], action: Action): Exercise[] => {
         }
         return ex;
       });
-    case "REMOVE_EXERCISE":
-      return state.filter((ex) => ex.id !== action.payload.id);
-    default:
-      return state;
+
   }
 };

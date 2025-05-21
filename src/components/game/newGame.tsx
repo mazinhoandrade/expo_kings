@@ -3,10 +3,37 @@
 import { Play } from 'lucide-react';
 import React, { useEffect, useReducer } from 'react'
 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select";
 import { GameReducer } from '@/reducers/startGame';
 
 import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { DatePickerWithPresets, DatePickerWithRange } from './caledar';
+import SheetAddExercises from './sheetAddExercises';
 const STORAGE_KEY = "gameadd";
+
+const data = [
+    {
+      value: "Perna",
+      label: "Perna",
+    },
+    {
+      value: "Costas",
+      label: "Costas",
+    },
+    {
+      value: "Triceps",
+      label: "Triceps",
+    },
+  ];
+
+
 const NewGame = () => {
     const [state, dispatch] = useReducer(
         GameReducer, 
@@ -84,6 +111,19 @@ const NewGame = () => {
 
   return (
     <div className="w-full p-2 pb-10 overflow-x-hidden">
+        <div className="mx-2 space-y-3">
+        <Input
+          type="text"
+          placeholder="Descrição do Jogo"
+          className="focus:visible:ring-0 mt-2 rounded-none border-0 border-b border-zinc-600 p-2 focus:border-b focus:outline-none focus:ring-0"
+        />
+        <div>
+        <DatePickerWithPresets  />
+        </div>
+        
+      </div>
+
+
       {/* Lista dos exercícios selecionados */}
       
           <ul className="mb-3 mt-2 space-y-3">
@@ -110,7 +150,7 @@ const NewGame = () => {
           </ul>
 
       {/* Botão que abre o Sheet */}
-      {/* <AddExercises handleSelecionar={handleSelecionar} /> */}
+      <SheetAddExercises handleSelecionar={handleSelecionar} />
 
       <div className="flex flex-col gap-3">      
         <Button
