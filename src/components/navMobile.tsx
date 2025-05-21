@@ -40,7 +40,10 @@ export const NavMobile = () => {
         </Link>
 
         <Link href="/admin/game">
-          <button className={`${handleLinkClick("admin/game")}`}>
+          <button
+            disabled={!data?.user}
+            className={`${handleLinkClick("admin/game")} ${!data?.user ? "opacity-50" : ""} `}
+          >
             <span className="text-2xl">
               <CirclePlus />
             </span>
@@ -51,7 +54,9 @@ export const NavMobile = () => {
         <Link href="/admin/account">
           <button
             disabled={!data?.user}
-            className={`${handleLinkClick("admin/account")}`}
+            className={`${handleLinkClick("admin/account")} ${
+              !data?.user ? "opacity-50" : ""
+            }`}
           >
             <span className="text-2xl">
               <UserPen />
