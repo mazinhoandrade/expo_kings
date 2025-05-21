@@ -1,6 +1,6 @@
 "use client";
 
-import { House, PanelLeftClose, UserPen, Users } from "lucide-react";
+import { CirclePlus, House, LogOut, UserPen, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -31,10 +31,7 @@ export const NavMobile = () => {
         </Link>
 
         <Link href="/admin/players">
-          <button
-            disabled={!data?.user}
-            className={`${handleLinkClick("admin/repositorie")}`}
-          >
+          <button className={`${handleLinkClick("admin/players")}`}>
             <span className="text-2xl">
               <Users />
             </span>
@@ -42,10 +39,19 @@ export const NavMobile = () => {
           </button>
         </Link>
 
+        <Link href="/admin/game">
+          <button className={`${handleLinkClick("admin/game")}`}>
+            <span className="text-2xl">
+              <CirclePlus />
+            </span>
+            <span className="text-xs">Jogos</span>
+          </button>
+        </Link>
+
         <Link href="/admin/account">
           <button
             disabled={!data?.user}
-            className={`${handleLinkClick("admin/repositorie")}`}
+            className={`${handleLinkClick("admin/account")}`}
           >
             <span className="text-2xl">
               <UserPen />
@@ -60,7 +66,7 @@ export const NavMobile = () => {
             onClick={handleLogoutClick}
           >
             <span className="text-2xl">
-              <PanelLeftClose />
+              <LogOut />
             </span>
             <span className="text-xs">Sair</span>
           </div>

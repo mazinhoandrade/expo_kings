@@ -17,10 +17,12 @@ const SignInDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>
-          <LogIn />
-          Login
-        </Button>
+        <button className="flex flex-col items-center">
+          <span className="text-2xl">
+            <LogIn />
+          </span>
+          <span className="text-xs">Login</span>
+        </button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
