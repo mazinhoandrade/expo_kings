@@ -23,8 +23,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { restIterval } from "@/data/restInterval";
-import { Exercise } from "@/types/exercise";
 
 type Props = {
   ex: Exercise;
@@ -118,10 +116,10 @@ const ItemGame = ({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Séries</TableHead>
-              <TableHead className="w-[100px]">Anterior</TableHead>
-              <TableHead>Kg</TableHead>
-              <TableHead>Reps</TableHead>
+              <TableHead className="w-[100px]">Nome</TableHead>
+              <TableHead className="w-[100px]">Gols</TableHead>
+              <TableHead>Assistências</TableHead>
+              <TableHead>Defesas</TableHead>
               <TableHead>
                 <FaCheck />
               </TableHead>
@@ -211,4 +209,4 @@ const ItemGame = ({
   );
 };
 
-export default ListExerciseTraning;
+export default ItemGame;
