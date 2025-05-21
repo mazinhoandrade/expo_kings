@@ -16,14 +16,14 @@ export const NavMobile = () => {
 
   const handleLinkClick = (active: string = "") => {
     return pathname?.slice(1, pathname?.length) === active
-      ? "bg-primary  p-2 rounded-lg p flex flex-col items-center"
+      ? "bg-zinc-800  p-2 rounded-lg p flex flex-col items-center"
       : "p p-2 flex flex-col items-center ";
   };
 
   return (
-    <nav className="fixed inset-x-0 right-0 bottom-0 left-0 z-40 border-t bg-white lg:hidden dark:bg-black">
+    <nav className="fixed inset-x-0 right-0 bottom-0 left-0 z-40 border-t">
       <div className="flex items-center justify-around p-2">
-        <Link href="/" className={` ${handleLinkClick("admin")}`}>
+        <Link href="/" className={` ${handleLinkClick("")}`}>
           <span className="text-2xl">
             <House />
           </span>
