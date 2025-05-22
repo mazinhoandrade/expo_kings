@@ -1,6 +1,8 @@
+import ListPlayers from "@/components/player/listPlayers";
+
 export default function Players() {
     return (
-      <div>lista de players</div>
+      <div><ListPlayers /></div>
     );
   }
   

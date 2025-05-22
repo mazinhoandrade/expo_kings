@@ -12,3 +12,17 @@ export interface User {
     createdAt?: Date;
     updatedAt?: Date;
 }
+
+export interface PlayerStats {
+  id: string;
+  name: string;
+  image: string;
+  birthday: Date;
+  monthlypayment: boolean;
+  position: string;
+  totalGols: number;
+  totalAssistances: number;
+  totalTopcover: number;
+  totalDefenses: number;
+  gamesPlayed: number;
+}

@@ -23,10 +23,6 @@ export default async function AddGame() {
         redirect("/");
       }
 
-    return (
-      <div className="mb-20 mt-10 space-y-8">
-      <FormGame />
-    </div>
-    );
+    return (<FormGame />);
   }
   

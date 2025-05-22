@@ -1,17 +1,17 @@
 
 import { getGames } from "@/app/_data/get-games";
-import { Game } from "@/app/types/game";
+import ListGame from "@/components/game/listGame";
 
 
 
 
 export default async function Page() {
   const games = await getGames();
+  console.log(games[0].players);
     return (
       <div>
-        {games.map((game) => (
-          <div className="text-white text-3xl" key={game.id}>{game.id}</div>
-        ))}
+        <h1>Games</h1>
+        <ListGame games={games} />
       </div>
     );
   }

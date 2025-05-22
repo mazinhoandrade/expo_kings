@@ -93,21 +93,20 @@ export default function FormGame() {
 
 
   return (
-    <div className="w-full p-2 pb-10 overflow-x-hidden">
-    <form onSubmit={handleSubmit} className="space-y-4 mx-2">
+    <div>
+    <form onSubmit={handleSubmit} className="space-y-4">
       <Input value={description} onChange={e => setDescription(e.target.value)} placeholder="Descrição" />
       <SelectDate value={date} onChange={setDate} />
-      {/* <Input type="datetime-local"  inputMode="numeric" value={date} onChange={e => setDate(e.target.value)} /> */}
 
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Nome</TableHead>
             <TableHead>Gols</TableHead>
-            <TableHead>Assistências</TableHead>
+            <TableHead>Assists</TableHead>
             <TableHead>Defesas</TableHead>
             <TableHead>Capa</TableHead>
-            <TableHead>Remover</TableHead>
+            <TableHead>Excluir</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -126,7 +125,7 @@ export default function FormGame() {
         handleSelecionar={player => addPlayer(player.name, player.id)}
       />
 
-<Button
+          <Button
             type="submit"
             disabled={players.length <=0}
             className="text-sm hover:bg-zinc-750  w-full bg-zinc-800  text-white focus:outline-none"
@@ -135,7 +134,7 @@ export default function FormGame() {
           </Button>
     </form>
 
-        <div className="flex flex-col mx-2 py-3">   
+        <div className="flex flex-col py-3">   
         <DialogApp label="Cancelar Jogo" onClick={handleCancelGame} disabled={players.length<=0} />
           </div>     
     </div>

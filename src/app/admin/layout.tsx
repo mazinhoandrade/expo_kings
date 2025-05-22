@@ -15,6 +15,8 @@ export default async function RootLayout({
   }
   return <>
   <Header/>
+  <div className="w-full p-2 pb-10 overflow-x-hidden mb-20">
   {children}
+  </div>
   </>;
 }

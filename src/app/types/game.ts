@@ -4,7 +4,14 @@ export interface Game {
     id: string;
     description?: string;
     date: Date;
-    player: PlayerStatistics[];
+    players?: PlayerStatistics[];
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface  GameWithPlayer   {
+    id: string,
+    date: Date,
+    players: PlayerStatistics[],
+    playerCount: number
+  }

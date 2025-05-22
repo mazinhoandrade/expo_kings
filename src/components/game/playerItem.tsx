@@ -19,7 +19,7 @@ export default function PlayerItem({
 }: PlayerItemProps) {
   return (
     <TableRow key={player.userId}>
-      <TableCell>{player.name}</TableCell>
+      <TableCell className="capitalize">{player.name.split(" ")[0]}</TableCell>
       <TableCell>
         <Input
           type="number"
@@ -56,6 +56,7 @@ export default function PlayerItem({
           onCheckedChange={(checked) =>
             handleChange(player.userId, "topcover", checked === true)
           }
+          className="w-6 h-6"
         />
       </TableCell>
       <TableCell>
