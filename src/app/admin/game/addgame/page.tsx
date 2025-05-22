@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
-import NewGame from "@/components/game/newGame";
+import FormGame from "@/components/game/formGame";
 
 import NotFoundAdmin from "../../not-found";
 
@@ -25,7 +25,7 @@ export default async function AddGame() {
 
     return (
       <div className="mb-20 mt-10 space-y-8">
-      <NewGame />
+      <FormGame />
     </div>
     );
   }

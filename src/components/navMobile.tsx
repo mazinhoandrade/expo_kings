@@ -21,7 +21,7 @@ export const NavMobile = () => {
   };
 
   return (
-    <nav className="fixed inset-x-0 right-0 bottom-0 left-0 z-40 border-t">
+    <nav className="fixed inset-x-0 right-0 bottom-0 left-0 z-40 border-t dark:bg-zinc-900">
       <div className="flex items-center justify-around p-2">
         <Link href="/" className={` ${handleLinkClick("")}`}>
           <span className="text-2xl">

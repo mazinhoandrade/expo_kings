@@ -4,15 +4,14 @@ import { getServerSession } from "next-auth"
 
 import { authOptions } from "../_lib/auth"
 import { db } from "../_lib/prisma"
-import { User } from "../types/user"
+import { Game } from "../types/game"
 
-export const getListUsers = async (): Promise<Omit<User, "statistics">[]> => {
+export const getGames = async (): Promise<Omit<Game, "player">[]> => {
   const session = await getServerSession(authOptions)
   if (!session?.user) return []
-  const users = await db.user.findMany({
+  const games = await db.game.findMany({
     orderBy: {
       createdAt: "asc",
-    },
-  })
-  return users as Omit<User, "statistics">[]
+  }})
+  return games as Omit<Game, "player">[]
 }

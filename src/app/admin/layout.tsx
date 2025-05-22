@@ -1,5 +1,7 @@
 import { getServerSession } from "next-auth";
 
+import Header from "@/components/header";
+
 import { authOptions } from "../_lib/auth";
 import NotFoundAdmin from "./not-found";
 export default async function RootLayout({
@@ -11,5 +13,8 @@ export default async function RootLayout({
   if (!session?.user) {
     return NotFoundAdmin();
   }
-  return <>{children}</>;
+  return <>
+  <Header/>
+  {children}
+  </>;
 }

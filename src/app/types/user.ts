@@ -1,3 +1,5 @@
+import { PlayerStatistics } from "./playerStatistics";
+
 export interface User {
     id: string;
     name: string;
@@ -6,6 +8,7 @@ export interface User {
     admin: boolean;
     birthday: Date;
     monthlypayment: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    statistics: PlayerStatistics[];
+    createdAt?: Date;
+    updatedAt?: Date;
 }

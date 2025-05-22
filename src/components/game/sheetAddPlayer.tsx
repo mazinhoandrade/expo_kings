@@ -17,13 +17,13 @@ import {
 } from "@/components/ui/sheet";
 
 interface Props {
-  handleSelecionar: (name: string) => void;
+  handleSelecionar: (user: { name: string; id: string }) => void;
 }
 
-const SheetAddExercises = ({ handleSelecionar }: Props) => {
+const SheetAddPlayer = ({ handleSelecionar }: Props) => {
   const [open, setOpen] = useState(false);
 
-  const [players, setPlayers] = useState<User[]>([]);
+  const [players, setPlayers] = useState<Omit<User, "statistics">[]>([]);
 
   const getExercise = async () => {
     const data = await getListUsers();
@@ -34,15 +34,15 @@ const SheetAddExercises = ({ handleSelecionar }: Props) => {
     getExercise();
   }, []);
 
-  const handleSelectExercise = (name: string) => {
-    handleSelecionar(name);
+  const handleSelectExercise = (name: string, id: string) => {
+    handleSelecionar({id, name}); 
     setOpen(false);
   };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button className="hover:bg-zinc-750 w-full py-5 text-lg text-white focus:outline-none">
+        <Button className=" w-full py-5 text-lg focus:outline-none">
           + Adicionar Jogador
         </Button>
       </SheetTrigger>
@@ -65,8 +65,8 @@ const SheetAddExercises = ({ handleSelecionar }: Props) => {
             players.map((ex) => (
               <li
                 className="cursor-pointer"
-                onClick={() => handleSelectExercise(ex.name)}
-                key={ex.name}
+                onClick={() => handleSelectExercise(ex.name, ex.id)}
+                key={ex.id}
               >
                 <div className="flex items-center justify-between border-b border-zinc-600 py-2">
                   <div className="mr-2 w-1/6">
@@ -83,7 +83,7 @@ const SheetAddExercises = ({ handleSelecionar }: Props) => {
                   {ex.monthlypayment && 
                   <p title="mensalista" ><ShieldCheck className="text-blue-500"/></p>
                   }
-                  
+    
                 </div>
               </li>
             ))}
@@ -99,4 +99,4 @@ const SheetAddExercises = ({ handleSelecionar }: Props) => {
   );
 };
 
-export default SheetAddExercises;
+export default SheetAddPlayer;
