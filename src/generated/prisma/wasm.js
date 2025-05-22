@@ -129,6 +129,7 @@ exports.Prisma.UserScalarFieldEnum = {
   admin: 'admin',
   birthday: 'birthday',
   monthlypayment: 'monthlypayment',
+  position: 'position',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -197,7 +198,13 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Position = exports.$Enums.Position = {
+  GOLEIRO: 'GOLEIRO',
+  FIXO: 'FIXO',
+  ALA: 'ALA',
+  PIVO: 'PIVO',
+  CORINGA: 'CORINGA'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

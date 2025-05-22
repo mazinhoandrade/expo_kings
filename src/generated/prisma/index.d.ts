@@ -45,6 +45,26 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
 export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Position: {
+  GOLEIRO: 'GOLEIRO',
+  FIXO: 'FIXO',
+  ALA: 'ALA',
+  PIVO: 'PIVO',
+  CORINGA: 'CORINGA'
+};
+
+export type Position = (typeof Position)[keyof typeof Position]
+
+}
+
+export type Position = $Enums.Position
+
+export const Position: typeof $Enums.Position
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -1422,6 +1442,7 @@ export namespace Prisma {
     admin: boolean | null
     birthday: Date | null
     monthlypayment: boolean | null
+    position: $Enums.Position | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1435,6 +1456,7 @@ export namespace Prisma {
     admin: boolean | null
     birthday: Date | null
     monthlypayment: boolean | null
+    position: $Enums.Position | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1448,6 +1470,7 @@ export namespace Prisma {
     admin: number
     birthday: number
     monthlypayment: number
+    position: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1463,6 +1486,7 @@ export namespace Prisma {
     admin?: true
     birthday?: true
     monthlypayment?: true
+    position?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1476,6 +1500,7 @@ export namespace Prisma {
     admin?: true
     birthday?: true
     monthlypayment?: true
+    position?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1489,6 +1514,7 @@ export namespace Prisma {
     admin?: true
     birthday?: true
     monthlypayment?: true
+    position?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1575,6 +1601,7 @@ export namespace Prisma {
     admin: boolean
     birthday: Date | null
     monthlypayment: boolean
+    position: $Enums.Position
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1605,6 +1632,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: boolean
     monthlypayment?: boolean
+    position?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -1622,6 +1650,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: boolean
     monthlypayment?: boolean
+    position?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1635,6 +1664,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: boolean
     monthlypayment?: boolean
+    position?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1648,11 +1678,12 @@ export namespace Prisma {
     admin?: boolean
     birthday?: boolean
     monthlypayment?: boolean
+    position?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "admin" | "birthday" | "monthlypayment" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "admin" | "birthday" | "monthlypayment" | "position" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -1678,6 +1709,7 @@ export namespace Prisma {
       admin: boolean
       birthday: Date | null
       monthlypayment: boolean
+      position: $Enums.Position
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2114,6 +2146,7 @@ export namespace Prisma {
     readonly admin: FieldRef<"User", 'Boolean'>
     readonly birthday: FieldRef<"User", 'DateTime'>
     readonly monthlypayment: FieldRef<"User", 'Boolean'>
+    readonly position: FieldRef<"User", 'Position'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -8074,6 +8107,7 @@ export namespace Prisma {
     admin: 'admin',
     birthday: 'birthday',
     monthlypayment: 'monthlypayment',
+    position: 'position',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8211,6 +8245,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Position'
+   */
+  export type EnumPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Position'>
+    
+
+
+  /**
+   * Reference to a field of type 'Position[]'
+   */
+  export type ListEnumPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Position[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -8253,6 +8301,7 @@ export namespace Prisma {
     admin?: BoolFilter<"User"> | boolean
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     monthlypayment?: BoolFilter<"User"> | boolean
+    position?: EnumPositionFilter<"User"> | $Enums.Position
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
@@ -8269,6 +8318,7 @@ export namespace Prisma {
     admin?: SortOrder
     birthday?: SortOrderInput | SortOrder
     monthlypayment?: SortOrder
+    position?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
@@ -8288,6 +8338,7 @@ export namespace Prisma {
     admin?: BoolFilter<"User"> | boolean
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
     monthlypayment?: BoolFilter<"User"> | boolean
+    position?: EnumPositionFilter<"User"> | $Enums.Position
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
@@ -8304,6 +8355,7 @@ export namespace Prisma {
     admin?: SortOrder
     birthday?: SortOrderInput | SortOrder
     monthlypayment?: SortOrder
+    position?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -8323,6 +8375,7 @@ export namespace Prisma {
     admin?: BoolWithAggregatesFilter<"User"> | boolean
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     monthlypayment?: BoolWithAggregatesFilter<"User"> | boolean
+    position?: EnumPositionWithAggregatesFilter<"User"> | $Enums.Position
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -8668,6 +8721,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -8684,6 +8738,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -8700,6 +8755,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -8716,6 +8772,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -8732,6 +8789,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8745,6 +8803,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8758,6 +8817,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9158,6 +9218,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumPositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.Position | EnumPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.Position[] | ListEnumPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Position[] | ListEnumPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPositionFilter<$PrismaModel> | $Enums.Position
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9213,6 +9280,7 @@ export namespace Prisma {
     admin?: SortOrder
     birthday?: SortOrder
     monthlypayment?: SortOrder
+    position?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9226,6 +9294,7 @@ export namespace Prisma {
     admin?: SortOrder
     birthday?: SortOrder
     monthlypayment?: SortOrder
+    position?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9239,6 +9308,7 @@ export namespace Prisma {
     admin?: SortOrder
     birthday?: SortOrder
     monthlypayment?: SortOrder
+    position?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9299,6 +9369,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumPositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Position | EnumPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.Position[] | ListEnumPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Position[] | ListEnumPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPositionWithAggregatesFilter<$PrismaModel> | $Enums.Position
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPositionFilter<$PrismaModel>
+    _max?: NestedEnumPositionFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -9624,6 +9704,10 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type EnumPositionFieldUpdateOperationsInput = {
+    set?: $Enums.Position
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -9870,6 +9954,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumPositionFilter<$PrismaModel = never> = {
+    equals?: $Enums.Position | EnumPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.Position[] | ListEnumPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Position[] | ListEnumPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPositionFilter<$PrismaModel> | $Enums.Position
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9957,6 +10048,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPositionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Position | EnumPositionFieldRefInput<$PrismaModel>
+    in?: $Enums.Position[] | ListEnumPositionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Position[] | ListEnumPositionFieldRefInput<$PrismaModel>
+    not?: NestedEnumPositionWithAggregatesFilter<$PrismaModel> | $Enums.Position
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPositionFilter<$PrismaModel>
+    _max?: NestedEnumPositionFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10273,6 +10374,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -10288,6 +10390,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -10340,6 +10443,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -10355,6 +10459,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -10397,6 +10502,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -10412,6 +10518,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -10443,6 +10550,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -10458,6 +10566,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -10473,6 +10582,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -10488,6 +10598,7 @@ export namespace Prisma {
     admin?: boolean
     birthday?: Date | string | null
     monthlypayment?: boolean
+    position?: $Enums.Position
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -10519,6 +10630,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -10534,6 +10646,7 @@ export namespace Prisma {
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
+    position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
