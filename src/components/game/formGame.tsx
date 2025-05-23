@@ -6,7 +6,13 @@ import { toast } from "sonner";
 import { PlayerInput } from "@/app/types/playerStatistics";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableHead,TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { playerReducer } from "@/reducers/playerReducer";
 
 import DialogApp from "../dialogApp";
@@ -17,7 +23,7 @@ import SheetAddPlayer from "./sheetAddPlayer";
 const STORAGE_KEY = "gameadd";
 export default function FormGame() {
   const router = useRouter();
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const [date, setDate] = useState<Date>();
   const [players, dispatch] = useReducer(playerReducer, []);
   const [loading, setLoading] = useState(false);
@@ -49,8 +55,8 @@ export default function FormGame() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         description,
-        date: date?date: new Date(),
-        players: players.map(p => ({
+        date: date ? date : new Date(),
+        players: players.map((p) => ({
           userId: p.userId,
           gols: p.gols,
           assistances: p.assistances,
@@ -63,7 +69,7 @@ export default function FormGame() {
     if (res.ok) {
       toast.success("Jogo cadastrado com sucesso!");
       reset();
-      setDescription('');
+      setDescription("");
       router.replace("/admin/game");
     } else {
       const data = await res.json();
@@ -80,7 +86,11 @@ export default function FormGame() {
     dispatch({ type: "REMOVE_PLAYER", payload: { userId } });
   };
 
-  const updateField = (userId: string, field: keyof PlayerInput, value: string|boolean) => {
+  const updateField = (
+    userId: string,
+    field: keyof PlayerInput,
+    value: string | boolean,
+  ) => {
     dispatch({ type: "UPDATE_FIELD", payload: { userId, field, value } });
   };
 
@@ -90,61 +100,70 @@ export default function FormGame() {
 
   const handleCancelGame = () => {
     reset();
-    setDescription('');
+    setDescription("");
     router.replace("/admin/game");
   };
 
-
   return (
     <div>
-    {loading && 
-    <div className="bg-black/70 bg-opacity-20 fixed inset-0 flex items-center justify-center z-10">
-      <div className="animate-bounce mx-auto mt-4 text-4xl">⚽</div>
-    </div>
-    }
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <Input value={description} onChange={e => setDescription(e.target.value)} placeholder="Descrição" />
-      <SelectDate value={date} onChange={setDate} />
+      {loading && (
+        <div className="bg-opacity-20 fixed inset-0 z-10 flex items-center justify-center bg-black/70">
+          <div className="mx-auto mt-4 animate-bounce text-4xl">⚽</div>
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Descrição"
+        />
+        <SelectDate value={date} onChange={setDate} />
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Nome</TableHead>
-            <TableHead>Gols</TableHead>
-            <TableHead>Assists</TableHead>
-            <TableHead>Defesas</TableHead>
-            <TableHead>Capa</TableHead>
-            <TableHead>Excluir</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {players.map(player => (
-            <PlayerItem
-              key={player.userId}
-              player={player}
-              handleChange={(userId, field, value) => updateField(userId, field, value)}
-              removePlayer={userId => removePlayer(userId)}
-            />
-          ))}
-        </TableBody>
-      </Table>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Nome</TableHead>
+              <TableHead>Gols</TableHead>
+              <TableHead>Assists</TableHead>
+              <TableHead>Defesas</TableHead>
+              <TableHead>Capa</TableHead>
+              <TableHead>Excluir</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {players.map((player) => (
+              <PlayerItem
+                key={player.userId}
+                player={player}
+                handleChange={(userId, field, value) =>
+                  updateField(userId, field, value)
+                }
+                removePlayer={(userId) => removePlayer(userId)}
+              />
+            ))}
+          </TableBody>
+        </Table>
 
-      <SheetAddPlayer
-        handleSelecionar={player => addPlayer(player.name, player.id)}
-      />
+        <SheetAddPlayer
+          handleSelecionar={(player) => addPlayer(player.name, player.id)}
+        />
 
-          <Button
-            type="submit"
-            disabled={players.length <=0 || loading}
-            className="text-sm hover:bg-zinc-750  w-full bg-zinc-800  text-white focus:outline-none"
-          >
-            Salvar Jogo
-          </Button>
-    </form>
+        <Button
+          type="submit"
+          disabled={players.length <= 0 || loading}
+          className="hover:bg-zinc-750 w-full bg-zinc-800 text-sm text-white focus:outline-none"
+        >
+          Salvar Jogo
+        </Button>
+      </form>
 
-        <div className="flex flex-col py-3">   
-        <DialogApp label="Cancelar Jogo" onClick={handleCancelGame} disabled={players.length<=0 || loading} />
-        </div>     
+      <div className="flex flex-col py-3">
+        <DialogApp
+          label="Cancelar Jogo"
+          onClick={handleCancelGame}
+          disabled={players.length <= 0 || loading}
+        />
+      </div>
     </div>
   );
 }
