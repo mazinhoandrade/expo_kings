@@ -5,26 +5,29 @@ import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
 
 
-export async function DELETE(
+export async function PATCH(
     req: Request, 
     { params }: { params: { id: string } 
-  }) {
+}) {
     const session = await getServerSession(authOptions);
-    const user = await db.user.findUnique({
-      where: { email: session?.user?.email as string },
-    });
-  
-    if (!session || !session.user || !user?.admin) {
+    if (!session || !session.user) {
       return NextResponse.json({ status: 401 });
     }
 
-  const { id } = await Promise.resolve(params);
-  if (!id) {
-    return NextResponse.json({ status: 400 });
-  }
-  try {
-    await db.game.delete({
+    const { id } = await Promise.resolve(params);
+    if (!id) {
+      return NextResponse.json({ status: 400 });
+    }
+
+    try {
+     const { name, position, birthday } = await req.json();
+     await db.user.update({
       where: { id },
+      data: {
+        name,
+        position,
+        birthday,
+      },
     });
 
     return NextResponse.json({ status: 200 });

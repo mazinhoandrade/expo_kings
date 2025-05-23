@@ -4,7 +4,7 @@ import SignInDialog from "@/components/sign-in-dialog";
 
 export default function NotFoundAdmin() {
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-auto mb-20">
             <Image
                 src="/ball.png"
                 alt="Página não encontrada"

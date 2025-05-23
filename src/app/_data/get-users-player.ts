@@ -17,6 +17,24 @@ export const getListUsers = async (): Promise<Omit<User, "statistics">[]> => {
   return users as Omit<User, "statistics">[]
 }
 
+export const getUser = async (): Promise<Omit<User, "statistics">> => {
+  const session = await getServerSession(authOptions)
+  if (!session?.user) return {} as User
+  const user = await db.user.findUnique({
+    where: { email: session?.user?.email as string },
+  })
+  return user as Omit<User, "statistics">
+}
+
+export const getUserAdmin = async (): Promise<boolean> => {
+  const session = await getServerSession(authOptions)
+  if (!session?.user) return false
+  const user = await db.user.findUnique({
+    where: { email: session?.user?.email as string },
+  })
+  const admin = user?.admin?true:false
+  return admin;
+}
 
 export const getListPlayers = async (): Promise<PlayerStats[]> => {
   const session = await getServerSession(authOptions)

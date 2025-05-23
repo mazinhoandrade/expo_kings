@@ -20,6 +20,7 @@ export default function FormGame() {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState<Date>();
   const [players, dispatch] = useReducer(playerReducer, []);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -37,6 +38,7 @@ export default function FormGame() {
   }, [players]);
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setLoading(true);
     e.preventDefault();
     if (players.length === 0) {
       toast.error("Nenhum jogador adicionado!");
@@ -66,6 +68,7 @@ export default function FormGame() {
     } else {
       const data = await res.json();
       toast.error(data.message);
+      setLoading(false);
     }
   };
 
@@ -127,7 +130,7 @@ export default function FormGame() {
 
           <Button
             type="submit"
-            disabled={players.length <=0}
+            disabled={players.length <=0 || loading}
             className="text-sm hover:bg-zinc-750  w-full bg-zinc-800  text-white focus:outline-none"
           >
             Salvar Jogo
@@ -135,8 +138,8 @@ export default function FormGame() {
     </form>
 
         <div className="flex flex-col py-3">   
-        <DialogApp label="Cancelar Jogo" onClick={handleCancelGame} disabled={players.length<=0} />
-          </div>     
+        <DialogApp label="Cancelar Jogo" onClick={handleCancelGame} disabled={players.length<=0 || loading} />
+        </div>     
     </div>
   );
 }

@@ -28,14 +28,14 @@ export async function POST(req: Request) {
   });
 
   if (!session || !session.user || !user?.admin) {
-    return NextResponse.json({ message: "Não autorizado" }, { status: 401 });
+    return NextResponse.json({ status: 401 });
   }
   try {
     const body = await req.json();
     const { description, date, players }: GameInput = body;
 
     if (!players || players.length === 0) {
-      return NextResponse.json({ message: "Jogadores obrigatórios" }, { status: 400 });
+      return NextResponse.json({ status: 400 });
     }
 
     const game = await db.game.create({
@@ -61,7 +61,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json(game, { status: 201 });
   } catch (error: any) {
-    console.error("Erro ao criar jogo:", error);
-    return NextResponse.json({ message: "Erro interno", error: error.message }, { status: 500 });
+    return NextResponse.json({ status: 500 });
   }
 }

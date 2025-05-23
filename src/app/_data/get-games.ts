@@ -44,3 +44,37 @@ export async function getGames(): Promise<GameWithPlayer[]> {
     await db.$disconnect();
   }
 }
+
+export const getTopCover = async () => {
+  try {
+    const games = await db.game.findFirst({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        date: true,
+        players: {
+          where: {
+            topcover: 1
+          },
+          select: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                image: true,
+                position: true
+              }
+            }
+          }
+        }
+      },
+    });
+    const topCoverPlayers = games?.players.map((p) => p.user) || [];
+    return topCoverPlayers;
+  } catch (error) {
+  } finally {
+    await db.$disconnect();
+  }
+}

@@ -8,6 +8,7 @@ export interface User {
     admin: boolean;
     birthday: Date;
     monthlypayment: boolean;
+    position: string;
     statistics: PlayerStatistics[];
     createdAt?: Date;
     updatedAt?: Date;
