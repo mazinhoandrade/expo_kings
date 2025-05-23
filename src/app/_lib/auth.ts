@@ -14,6 +14,27 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ user }) {
+      const LIMITE_USER = 30;
+
+      const usersExists = await db.user.findUnique({
+        where: {
+          email: user.email as string,
+        },
+      });
+
+      if (usersExists) {
+        return true;
+      }
+
+      const usersCount = await db.user.count();
+      if (usersCount >= LIMITE_USER) {
+        return false;
+      }
+
+      return true;
+    },
+
     async session({ session, user }) {
       session.user = {
         ...session.user,

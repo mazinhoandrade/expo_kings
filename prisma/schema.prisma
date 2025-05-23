@@ -50,7 +50,7 @@ model Game {
 
 model PlayerStatistics {
   id          String   @id @default(cuid())
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   game        Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId      String
