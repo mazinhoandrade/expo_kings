@@ -2,9 +2,10 @@
 "use client"
 
 import { Pencil } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
+import { getGames } from '@/app/_data/get-games'
 import { GameWithPlayer } from '@/app/types/game'
 import {
     Table,
@@ -18,11 +19,21 @@ import {
 import DialogApp from '../dialogApp'
 import { Button } from '../ui/button'
   interface Props {
-    games: GameWithPlayer[]
     authorization: boolean
   }
-const ListGame = ({games, authorization}:Props) => {
-const [loading, setLoading] = useState(false);
+const ListGame = ({authorization}:Props) => {
+const [loading, setLoading] = useState(true);
+const [games, setGames] = useState<GameWithPlayer[]>([]);
+
+const getGamesPlayers = async () => {
+  const data = await getGames(); 
+  setGames(data);
+  setLoading(false);
+};
+
+useEffect(() => {
+  getGamesPlayers();
+}, []);
   const handleDelete = async (id: string) => {
     setLoading(true);
     try {
@@ -30,8 +41,7 @@ const [loading, setLoading] = useState(false);
         method: 'DELETE',
       })
       toast.success('Jogo deletado com sucesso!')
-      window.location.reload();
-      setLoading(false);
+      getGamesPlayers();
     } catch (error) {
       console.error(error)
       toast.error('Erro ao deletar jogo')
@@ -52,7 +62,14 @@ const [loading, setLoading] = useState(false);
     </TableRow>
   </TableHeader>
   <TableBody>
-     {games.length > 0 && games?.map((game) => (
+  {loading && (
+                  <TableRow>
+                    <TableCell colSpan={5} className="h-24 text-center">
+                    <div className="animate-bounce mx-auto mt-4 text-4xl">⚽</div>
+                    </TableCell>
+                  </TableRow>
+                )}
+     {!loading && games.length > 0 && games?.map((game) => (
       <TableRow key={game.id}>
       <TableCell>{new Date(game.date).toLocaleDateString("pt-BR")}</TableCell>
       <TableCell>{game.playerCount}</TableCell>
@@ -65,7 +82,13 @@ const [loading, setLoading] = useState(false);
       }
       </TableRow>
     ))}
-    
+    {!loading && games.length === 0 && (
+                       <TableRow>
+                         <TableCell colSpan={5} className="h-24 text-center">
+                           Nenhum jogador encontrado.
+                         </TableCell>
+                       </TableRow>
+                     )}
   </TableBody>
 </Table>
   )

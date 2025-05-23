@@ -12,7 +12,7 @@ const CoverTop = async () => {
   .concat(topPLayers?.find(p => p.position === 'GOLEIRO') || []);
   return (
     <>
-    <h1 className='text-xl font-bold text-center mx-3 mt-5'>Melhores da Semana</h1>
+    <h1 className='text-xl font-bold text-center mx-3 mt-5'>Melhores da Semana ⚽</h1>
     <div className='relative'>
         <Image className='w-full' src="/salão.png" alt="" objectFit='cover' width={1000} height={500}/>
 

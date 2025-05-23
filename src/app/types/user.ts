@@ -27,3 +27,12 @@ export interface PlayerStats {
   totalDefenses: number;
   gamesPlayed: number;
 }
+
+export interface UserBrithdayMonth {
+  id: string;
+  name: string;
+  image: string;
+  monthlypayment: boolean;
+  position: string;
+  birthday: Date;
+}

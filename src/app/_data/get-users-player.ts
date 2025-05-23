@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth"
 
 import { authOptions } from "../_lib/auth"
 import { db } from "../_lib/prisma"
-import { PlayerStats, User } from "../types/user"
+import { PlayerStats, User, UserBrithdayMonth } from "../types/user"
 
 export const getListUsers = async (): Promise<Omit<User, "statistics">[]> => {
   const session = await getServerSession(authOptions)
@@ -75,4 +75,32 @@ export const getListPlayers = async (): Promise<PlayerStats[]> => {
     totalDefenses: user.statistics.reduce((sum, stat) => sum + stat.defenses, 0),
     gamesPlayed: user.statistics.length,
   }));
+}
+
+
+export const getUserBrithdayMonth = async (): Promise<UserBrithdayMonth[]> => {
+  const monthCurrent = new Date().getMonth()
+  const allUser = await db.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      image: true,
+      position: true,
+      monthlypayment: true,
+      birthday: true,
+    },
+    where: {
+      birthday: {
+        not: null,
+      },
+    },
+  })
+  
+  const getUserBrithdayMonth = allUser.filter(user => {
+    const birthdayMonth = user.birthday;
+    return birthdayMonth && birthdayMonth.getMonth() === monthCurrent;
+  })
+
+  return getUserBrithdayMonth.sort((a, b) => a.birthday?.getDate() - b.birthday?.getDate());
+
 }

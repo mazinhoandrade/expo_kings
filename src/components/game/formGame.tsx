@@ -97,6 +97,11 @@ export default function FormGame() {
 
   return (
     <div>
+    {loading && 
+    <div className="bg-black/70 bg-opacity-20 fixed inset-0 flex items-center justify-center z-10">
+      <div className="animate-bounce mx-auto mt-4 text-4xl">⚽</div>
+    </div>
+    }
     <form onSubmit={handleSubmit} className="space-y-4">
       <Input value={description} onChange={e => setDescription(e.target.value)} placeholder="Descrição" />
       <SelectDate value={date} onChange={setDate} />

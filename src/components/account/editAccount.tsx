@@ -1,6 +1,7 @@
 "use client"
 import { ShieldCheck } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -79,7 +80,6 @@ const EditAccount = ({authorization, admin}:Props) => {
             <Input type="text" name="name" placeholder={admin.name} onChange={(e) => setName(e.target.value)} />
             <Label>Aniversário:</Label>
             <Input type="date" name="date" value={date?.toISOString().split('T')[0]} onChange={(e) => setDate(new Date(e.target.value))} />
-            {/* <SelectDate value={date} onChange={setDate} /> */}
             <Label>Posição:</Label>
             <Select
             defaultValue={admin.position.toString()}
@@ -102,7 +102,7 @@ const EditAccount = ({authorization, admin}:Props) => {
           <Button disabled={loading} type='submit'>Salvar</Button>
         </form>
         {admin.admin &&
-          <Button variant={'outline'} className='mt-2 w-full' onClick={() => window.location.reload()}>Editar Players</Button>
+          <Link href="/admin/account/editusers"><Button variant={'outline'} className='mt-2 w-full'>Editar Players</Button></Link>
         }
     </div>
   )

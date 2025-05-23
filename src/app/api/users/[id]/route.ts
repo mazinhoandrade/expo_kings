@@ -35,3 +35,31 @@ export async function PATCH(
     return NextResponse.json({ status: 500 });
   }
 }
+
+export async function DELETE( 
+  req: Request,
+  { params }: { params: { id: string } 
+}) {
+  const session = await getServerSession(authOptions);
+  const user = await db.user.findUnique({
+    where: { email: session?.user?.email as string },
+  });
+
+  if (!session || !session.user || !user?.admin) {
+    return NextResponse.json({ status: 401 });
+  }
+
+const { id } = await Promise.resolve(params);
+if (!id) {
+  return NextResponse.json({ status: 400 });
+}
+try {
+  await db.user.delete({
+    where: { id },
+  });
+
+  return NextResponse.json({ status: 200 });
+} catch (error: any) {
+  return NextResponse.json({ status: 500 });
+}
+}
