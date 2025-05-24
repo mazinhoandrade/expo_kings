@@ -117,7 +117,14 @@ export default function FormGame() {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Descrição"
         />
-        <SelectDate value={date} onChange={setDate} />
+        <Input
+          type="date"
+          name="date"
+          value={date?.toISOString().split("T")[0]}
+          onChange={(e) => setDate(new Date(e.target.value))}
+        />
+
+        {/* <SelectDate value={date} onChange={setDate} /> */}
 
         <Table>
           <TableHeader>
