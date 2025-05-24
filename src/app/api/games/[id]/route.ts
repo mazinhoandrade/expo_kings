@@ -7,8 +7,8 @@ import { db } from "@/app/_lib/prisma";
 
 export async function DELETE(
     req: Request, 
-    { params }: { params: { id: string } 
-  }) {
+    { params }: { params: { id: string } }
+  ) : Promise<NextResponse> {
     const session = await getServerSession(authOptions);
     const user = await db.user.findUnique({
       where: { email: session?.user?.email as string },

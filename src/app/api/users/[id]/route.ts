@@ -7,14 +7,14 @@ import { db } from "@/app/_lib/prisma";
 
 export async function PATCH(
     req: Request, 
-    { params }: { params: { id: string } 
-}) {
+    context: { params: { id: string } }
+  ) {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return NextResponse.json({ status: 401 });
     }
 
-    const { id } = await Promise.resolve(params);
+    const { id } = context.params as { id: string };
     if (!id) {
       return NextResponse.json({ status: 400 });
     }
