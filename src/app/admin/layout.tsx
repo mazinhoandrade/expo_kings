@@ -13,10 +13,10 @@ export default async function RootLayout({
   if (!session?.user) {
     return NotFoundAdmin();
   }
-  return <>
-  <Header/>
-  <div className="w-full p-2 pb-10 overflow-x-hidden mb-20">
-  {children}
-  </div>
-  </>;
+  return (
+    <>
+      <Header />
+      <div className="mb-20 w-full overflow-x-hidden p-2 pb-10">{children}</div>
+    </>
+  );
 }

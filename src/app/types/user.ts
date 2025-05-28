@@ -1,17 +1,17 @@
 import { PlayerStatistics } from "./playerStatistics";
 
 export interface User {
-    id: string;
-    name: string;
-    email: string;
-    image: string;
-    admin: boolean;
-    birthday: Date;
-    monthlypayment: boolean;
-    position: string;
-    statistics: PlayerStatistics[];
-    createdAt?: Date;
-    updatedAt?: Date;
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  admin: boolean;
+  birthday: Date;
+  monthlypayment: boolean;
+  position: string;
+  statistics: PlayerStatistics[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface PlayerStats {
@@ -34,5 +34,5 @@ export interface UserBrithdayMonth {
   image: string;
   monthlypayment: boolean;
   position: string;
-  birthday: Date;
+  birthday: string;
 }

@@ -1,17 +1,26 @@
-import { PlayerStatistics } from "./playerStatistics";
+import { PlayerStatistics, PlayerStatisticsPayload } from "./playerStatistics";
 
 export interface Game {
-    id: string;
-    description?: string;
-    date: Date;
-    players?: PlayerStatistics[];
-    createdAt: Date;
-    updatedAt: Date;
+  id: string;
+  description?: string;
+  date: Date;
+  players?: PlayerStatistics[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export interface  GameWithPlayer   {
-    id: string,
-    date: Date,
-    players: PlayerStatistics[],
-    playerCount: number
-  }
+export interface GameEdit {
+  id: string;
+  description?: string;
+  date: Date;
+  players: PlayerStatisticsPayload[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface GameWithPlayer {
+  id: string;
+  date: Date;
+  players: PlayerStatistics[];
+  playerCount: number;
+}

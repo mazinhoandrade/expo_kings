@@ -3,6 +3,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  touch-action: pan-y;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overscroll-behavior-y: contain;
+  //position: fixed;
+  width: 100%;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

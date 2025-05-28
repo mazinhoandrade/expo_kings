@@ -1,33 +1,30 @@
-"use server"
+"use server";
 
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth";
 
-import { authOptions } from "../_lib/auth"
-import { db } from "../_lib/prisma"
+import { authOptions } from "../_lib/auth";
+import { db } from "../_lib/prisma";
 import { GameWithPlayer } from "../types/game";
 
-
-
-
 export async function getGames(): Promise<GameWithPlayer[]> {
-  const session = await getServerSession(authOptions)
-  if (!session?.user) return []
+  const session = await getServerSession(authOptions);
+  if (!session?.user) return [];
   try {
     const games = await db.game.findMany({
       include: {
         players: {
           include: {
-            user:{
+            user: {
               select: {
                 id: true,
                 name: true,
-              }
-            }
-          }
-        }
+              },
+            },
+          },
+        },
       },
       orderBy: {
-        date: 'desc',
+        date: "desc",
       },
     });
 
@@ -36,10 +33,51 @@ export async function getGames(): Promise<GameWithPlayer[]> {
       playerCount: game.players.length,
     }));
 
-    return  gamesWithPlayer;
+    return gamesWithPlayer;
   } catch (error) {
-    console.error('Error fetching games with player count:', error);
-    throw new Error('Failed to fetch games with player count');
+    console.error("Error fetching games with player count:", error);
+    throw new Error("Failed to fetch games with player count");
+  } finally {
+    await db.$disconnect();
+  }
+}
+
+export async function getGame(id: string) {
+  try {
+    const data = await db.game.findUnique({
+      where: { id },
+      include: {
+        players: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const game = {
+      ...data,
+      players: data?.players.map((player) => ({
+        //gameId: player.gameId,
+        userId: player.userId,
+        gols: player.gols,
+        assistances: player.assistances,
+        topcover: player.topcover === 1 ? true : false,
+        defenses: player.defenses,
+        name: player.user.name,
+        //id: player.user.id,
+      })),
+    };
+
+    return game;
+  } catch (error) {
+    console.error("Error fetching game:", error);
+    throw new Error("Failed to fetch game");
   } finally {
     await db.$disconnect();
   }
@@ -49,14 +87,14 @@ export const getTopCover = async () => {
   try {
     const games = await db.game.findFirst({
       orderBy: {
-        createdAt: 'desc',
+        createdAt: "desc",
       },
       select: {
         id: true,
         date: true,
         players: {
           where: {
-            topcover: 1
+            topcover: 1,
           },
           select: {
             user: {
@@ -64,11 +102,11 @@ export const getTopCover = async () => {
                 id: true,
                 name: true,
                 image: true,
-                position: true
-              }
-            }
-          }
-        }
+                position: true,
+              },
+            },
+          },
+        },
       },
     });
     const topCoverPlayers = games?.players.map((p) => p.user) || [];
@@ -77,4 +115,4 @@ export const getTopCover = async () => {
   } finally {
     await db.$disconnect();
   }
-}
+};

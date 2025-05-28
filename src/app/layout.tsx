@@ -1,12 +1,21 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
+import type { Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { NavMobile } from "@/components/navMobile";
 import { Toaster } from "@/components/ui/sonner";
 
 import AuthProvider from "./_providers/auth";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  interactiveWidget: "resizes-visual",
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

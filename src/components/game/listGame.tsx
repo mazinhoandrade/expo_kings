@@ -1,6 +1,7 @@
 "use client";
 
 import { Pencil } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -21,6 +22,7 @@ interface Props {
   authorization: boolean;
 }
 const ListGame = ({ authorization }: Props) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState<GameWithPlayer[]>([]);
 
@@ -71,7 +73,9 @@ const ListGame = ({ authorization }: Props) => {
           games?.map((game) => (
             <TableRow key={game.id}>
               <TableCell>
-                {new Date(game.date).toLocaleDateString("pt-BR")}
+                {new Date(game.date).toLocaleDateString("pt-BR", {
+                  timeZone: "UTC",
+                })}
               </TableCell>
               <TableCell>{game.playerCount}</TableCell>
               <TableCell>
@@ -79,7 +83,11 @@ const ListGame = ({ authorization }: Props) => {
               </TableCell>
               {authorization && (
                 <TableCell className="flex justify-end gap-2">
-                  <Button>
+                  <Button
+                    onClick={() => {
+                      router.push(`/admin/game/${game.id}`);
+                    }}
+                  >
                     <Pencil />
                   </Button>
                   <DialogApp

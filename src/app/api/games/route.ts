@@ -64,3 +64,41 @@ export async function POST(req: Request) {
     return NextResponse.json({ status: 500 });
   }
 }
+
+export async function GET() {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user) {
+    return NextResponse.json({ status: 401 });
+  }
+  try {
+    const games = await db.game.findFirst({
+      orderBy: {
+        date: "desc",
+      },
+      select: {
+        id: true,
+        date: true,
+        players: {
+          where: {
+            topcover: 1,
+          },
+          select: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                image: true,
+                position: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    const topCoverPlayers = games?.players.map((p) => p.user) || []; //
+    return NextResponse.json(topCoverPlayers, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json({ status: 500 });
+  }
+}
