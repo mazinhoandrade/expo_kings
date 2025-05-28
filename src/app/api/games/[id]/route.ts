@@ -89,29 +89,6 @@ export async function PATCH(
       }),
     ]);
 
-    // await db.game.update({
-    //   where: {
-    //     id: params.id,
-    //   },
-    //   data: {
-    //     description,
-    //     date: gameDate,
-    //     players: {
-    //       deleteMany: {},
-    //       create: players.map((player) => ({
-    //         userId: player.userId,
-    //         gols: player.gols || 0,
-    //         assistances: player.assistances || 0,
-    //         defenses: player.defenses || 0,
-    //         topcover: player.topcover,
-    //       })),
-    //     },
-    //   },
-    //   include: {
-    //     players: true,
-    //   },
-    // });
-
     return NextResponse.json({ status: 200 });
   } catch (error: any) {
     console.error(error);

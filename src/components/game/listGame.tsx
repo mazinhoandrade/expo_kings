@@ -92,7 +92,7 @@ const ListGame = ({ authorization }: Props) => {
                   </Button>
                   <DialogApp
                     disabled={loading}
-                    label="Excluir"
+                    label="X"
                     onClick={() => handleDelete(game.id)}
                   />
                 </TableCell>
