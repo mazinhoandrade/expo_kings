@@ -7,6 +7,7 @@ import { toast } from "sonner";
 
 import { getGames } from "@/app/_data/get-games";
 import { GameWithPlayer } from "@/app/types/game";
+import { PlayerInput } from "@/app/types/playerStatistics";
 import {
   Table,
   TableBody,
@@ -18,6 +19,7 @@ import {
 
 import DialogApp from "../dialogApp";
 import { Button } from "../ui/button";
+import SeeMoreGame from "./seeMoreGame";
 interface Props {
   authorization: boolean;
 }
@@ -77,9 +79,14 @@ const ListGame = ({ authorization }: Props) => {
                   timeZone: "UTC",
                 })}
               </TableCell>
-              <TableCell>{game.playerCount}</TableCell>
+              <TableCell>{game.players.length}</TableCell>
               <TableCell>
-                <Button>Ver +</Button>
+                <SeeMoreGame
+                  players={game.players as PlayerInput[]}
+                  date={new Date(game.date).toLocaleDateString("pt-BR", {
+                    timeZone: "UTC",
+                  })}
+                />
               </TableCell>
               {authorization && (
                 <TableCell className="flex justify-end gap-2">

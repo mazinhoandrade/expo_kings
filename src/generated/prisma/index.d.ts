@@ -1441,6 +1441,7 @@ export namespace Prisma {
     image: string | null
     admin: boolean | null
     birthday: Date | null
+    preapproval_plan_id: string | null
     monthlypayment: boolean | null
     position: $Enums.Position | null
     createdAt: Date | null
@@ -1455,6 +1456,7 @@ export namespace Prisma {
     image: string | null
     admin: boolean | null
     birthday: Date | null
+    preapproval_plan_id: string | null
     monthlypayment: boolean | null
     position: $Enums.Position | null
     createdAt: Date | null
@@ -1469,6 +1471,7 @@ export namespace Prisma {
     image: number
     admin: number
     birthday: number
+    preapproval_plan_id: number
     monthlypayment: number
     position: number
     createdAt: number
@@ -1485,6 +1488,7 @@ export namespace Prisma {
     image?: true
     admin?: true
     birthday?: true
+    preapproval_plan_id?: true
     monthlypayment?: true
     position?: true
     createdAt?: true
@@ -1499,6 +1503,7 @@ export namespace Prisma {
     image?: true
     admin?: true
     birthday?: true
+    preapproval_plan_id?: true
     monthlypayment?: true
     position?: true
     createdAt?: true
@@ -1513,6 +1518,7 @@ export namespace Prisma {
     image?: true
     admin?: true
     birthday?: true
+    preapproval_plan_id?: true
     monthlypayment?: true
     position?: true
     createdAt?: true
@@ -1600,6 +1606,7 @@ export namespace Prisma {
     image: string | null
     admin: boolean
     birthday: Date | null
+    preapproval_plan_id: string | null
     monthlypayment: boolean
     position: $Enums.Position
     createdAt: Date
@@ -1631,6 +1638,7 @@ export namespace Prisma {
     image?: boolean
     admin?: boolean
     birthday?: boolean
+    preapproval_plan_id?: boolean
     monthlypayment?: boolean
     position?: boolean
     createdAt?: boolean
@@ -1649,6 +1657,7 @@ export namespace Prisma {
     image?: boolean
     admin?: boolean
     birthday?: boolean
+    preapproval_plan_id?: boolean
     monthlypayment?: boolean
     position?: boolean
     createdAt?: boolean
@@ -1663,6 +1672,7 @@ export namespace Prisma {
     image?: boolean
     admin?: boolean
     birthday?: boolean
+    preapproval_plan_id?: boolean
     monthlypayment?: boolean
     position?: boolean
     createdAt?: boolean
@@ -1677,13 +1687,14 @@ export namespace Prisma {
     image?: boolean
     admin?: boolean
     birthday?: boolean
+    preapproval_plan_id?: boolean
     monthlypayment?: boolean
     position?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "admin" | "birthday" | "monthlypayment" | "position" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "admin" | "birthday" | "preapproval_plan_id" | "monthlypayment" | "position" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -1708,6 +1719,7 @@ export namespace Prisma {
       image: string | null
       admin: boolean
       birthday: Date | null
+      preapproval_plan_id: string | null
       monthlypayment: boolean
       position: $Enums.Position
       createdAt: Date
@@ -2145,6 +2157,7 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly admin: FieldRef<"User", 'Boolean'>
     readonly birthday: FieldRef<"User", 'DateTime'>
+    readonly preapproval_plan_id: FieldRef<"User", 'String'>
     readonly monthlypayment: FieldRef<"User", 'Boolean'>
     readonly position: FieldRef<"User", 'Position'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -8106,6 +8119,7 @@ export namespace Prisma {
     image: 'image',
     admin: 'admin',
     birthday: 'birthday',
+    preapproval_plan_id: 'preapproval_plan_id',
     monthlypayment: 'monthlypayment',
     position: 'position',
     createdAt: 'createdAt',
@@ -8300,6 +8314,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     admin?: BoolFilter<"User"> | boolean
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
+    preapproval_plan_id?: StringNullableFilter<"User"> | string | null
     monthlypayment?: BoolFilter<"User"> | boolean
     position?: EnumPositionFilter<"User"> | $Enums.Position
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -8317,6 +8332,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     admin?: SortOrder
     birthday?: SortOrderInput | SortOrder
+    preapproval_plan_id?: SortOrderInput | SortOrder
     monthlypayment?: SortOrder
     position?: SortOrder
     createdAt?: SortOrder
@@ -8337,6 +8353,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     admin?: BoolFilter<"User"> | boolean
     birthday?: DateTimeNullableFilter<"User"> | Date | string | null
+    preapproval_plan_id?: StringNullableFilter<"User"> | string | null
     monthlypayment?: BoolFilter<"User"> | boolean
     position?: EnumPositionFilter<"User"> | $Enums.Position
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -8354,6 +8371,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     admin?: SortOrder
     birthday?: SortOrderInput | SortOrder
+    preapproval_plan_id?: SortOrderInput | SortOrder
     monthlypayment?: SortOrder
     position?: SortOrder
     createdAt?: SortOrder
@@ -8374,6 +8392,7 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     admin?: BoolWithAggregatesFilter<"User"> | boolean
     birthday?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    preapproval_plan_id?: StringNullableWithAggregatesFilter<"User"> | string | null
     monthlypayment?: BoolWithAggregatesFilter<"User"> | boolean
     position?: EnumPositionWithAggregatesFilter<"User"> | $Enums.Position
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -8720,6 +8739,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -8737,6 +8757,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -8754,6 +8775,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8771,6 +8793,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8788,6 +8811,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -8802,6 +8826,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8816,6 +8841,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9279,6 +9305,7 @@ export namespace Prisma {
     image?: SortOrder
     admin?: SortOrder
     birthday?: SortOrder
+    preapproval_plan_id?: SortOrder
     monthlypayment?: SortOrder
     position?: SortOrder
     createdAt?: SortOrder
@@ -9293,6 +9320,7 @@ export namespace Prisma {
     image?: SortOrder
     admin?: SortOrder
     birthday?: SortOrder
+    preapproval_plan_id?: SortOrder
     monthlypayment?: SortOrder
     position?: SortOrder
     createdAt?: SortOrder
@@ -9307,6 +9335,7 @@ export namespace Prisma {
     image?: SortOrder
     admin?: SortOrder
     birthday?: SortOrder
+    preapproval_plan_id?: SortOrder
     monthlypayment?: SortOrder
     position?: SortOrder
     createdAt?: SortOrder
@@ -10373,6 +10402,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -10389,6 +10419,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -10442,6 +10473,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10458,6 +10490,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10501,6 +10534,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -10517,6 +10551,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -10549,6 +10584,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10565,6 +10601,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10581,6 +10618,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -10597,6 +10635,7 @@ export namespace Prisma {
     image?: string | null
     admin?: boolean
     birthday?: Date | string | null
+    preapproval_plan_id?: string | null
     monthlypayment?: boolean
     position?: $Enums.Position
     createdAt?: Date | string
@@ -10629,6 +10668,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10645,6 +10685,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     admin?: BoolFieldUpdateOperationsInput | boolean
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    preapproval_plan_id?: NullableStringFieldUpdateOperationsInput | string | null
     monthlypayment?: BoolFieldUpdateOperationsInput | boolean
     position?: EnumPositionFieldUpdateOperationsInput | $Enums.Position
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -30,7 +30,14 @@ export async function getGames(): Promise<GameWithPlayer[]> {
 
     const gamesWithPlayer = games.map((game) => ({
       ...game,
-      playerCount: game.players.length,
+      players: game.players.map((player) => ({
+        userId: player.userId,
+        gols: player.gols,
+        assistances: player.assistances,
+        topcover: player.topcover === 1 ? true : false,
+        defenses: player.defenses,
+        name: player.user.name,
+      })),
     }));
 
     return gamesWithPlayer;

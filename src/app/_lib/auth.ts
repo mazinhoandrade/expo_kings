@@ -36,15 +36,33 @@ export const authOptions: AuthOptions = {
     },
 
     async session({ session, user }) {
+      const dbUser = await db.user.findUnique({
+        where: {
+          id: user.id as string,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          birthday: true,
+          position: true,
+          image: true,
+          admin: true,
+          preapproval_plan_id: true,
+          monthlypayment: true,
+        },
+      });
       session.user = {
         ...session.user,
-        id: user.id,
-      } as {
-        id: string;
-        name: string;
-        email: string;
-        image: string;
-        admin: boolean;
+        id: dbUser?.id,
+        admin: dbUser?.admin,
+        name: dbUser?.name,
+        image: dbUser?.image,
+        birthday: dbUser?.birthday,
+        position: dbUser?.position,
+        email: dbUser?.email,
+        preapproval_plan_id: dbUser?.preapproval_plan_id,
+        monthlypayment: dbUser?.monthlypayment,
       };
       return session;
     },

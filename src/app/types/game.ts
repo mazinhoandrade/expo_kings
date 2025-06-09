@@ -1,4 +1,8 @@
-import { PlayerStatistics, PlayerStatisticsPayload } from "./playerStatistics";
+import {
+  PlayerInput,
+  PlayerStatistics,
+  PlayerStatisticsPayload,
+} from "./playerStatistics";
 
 export interface Game {
   id: string;
@@ -21,6 +25,5 @@ export interface GameEdit {
 export interface GameWithPlayer {
   id: string;
   date: Date;
-  players: PlayerStatistics[];
-  playerCount: number;
+  players: PlayerInput[];
 }
