@@ -48,7 +48,7 @@ export const authOptions: AuthOptions = {
           position: true,
           image: true,
           admin: true,
-          preapproval_plan_id: true,
+          subscriptionExpiresAt: true,
           monthlypayment: true,
         },
       });
@@ -61,7 +61,7 @@ export const authOptions: AuthOptions = {
         birthday: dbUser?.birthday,
         position: dbUser?.position,
         email: dbUser?.email,
-        preapproval_plan_id: dbUser?.preapproval_plan_id,
+        subscriptionExpiresAt: dbUser?.subscriptionExpiresAt,
         monthlypayment: dbUser?.monthlypayment,
       };
       return session;

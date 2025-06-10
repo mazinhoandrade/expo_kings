@@ -1,11 +1,13 @@
 import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth/next";
 
-import { getUserAdmin } from "@/app/_data/get-users-player";
+import { authOptions } from "@/app/_lib/auth";
 import EditUsers from "@/components/account/editUsers";
 
 export default async function Account() {
-  const authorization = await getUserAdmin();
+  const session = await getServerSession(authOptions);
+  if (!session?.user) redirect("/");
 
-  if (!authorization) redirect("/admin/account");
+  if (!session.user.admin) redirect("/admin/account");
   return <EditUsers />;
 }

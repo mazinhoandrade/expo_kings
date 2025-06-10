@@ -9,11 +9,7 @@ import EditAccount from "@/components/account/editAccount";
 
 export default async function Account() {
   const session = await getServerSession(authOptions);
-  const { user } = session as { user: User };
-  if (!user) {
-    redirect("/");
-  }
+  if (!session?.user) redirect("/");
 
-  //const admin = await getUser();
-  return <EditAccount User={user} />;
+  return <EditAccount User={session?.user as User} />;
 }

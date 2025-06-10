@@ -1,4 +1,3 @@
-
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
@@ -8,21 +7,22 @@ import FormGame from "@/components/game/formGame";
 
 import NotFoundAdmin from "../../not-found";
 
-
-
 export default async function AddGame() {
-    const session = await getServerSession(authOptions);
-      if (!session?.user) {
-        return NotFoundAdmin();
-    }
-   
-    const user = await db.user.findUnique({
-        where: { email: session?.user?.email as string },
-    });
-      if (!user?.admin) {
-        redirect("/");
-      }
-
-    return (<FormGame />);
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return NotFoundAdmin();
   }
-  
+
+  if (!session.user.admin) {
+    redirect("/admin/game");
+  }
+
+  const user = await db.user.findUnique({
+    where: { email: session?.user?.email as string },
+  });
+  if (!user?.admin) {
+    redirect("/");
+  }
+
+  return <FormGame />;
+}

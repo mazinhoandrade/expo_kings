@@ -30,7 +30,7 @@ model User {
   image               String?
   admin               Boolean            @default(false)
   birthday            DateTime?
-  preapproval_plan_id String?
+  subscriptionExpiresAt DateTime?
   monthlypayment      Boolean            @default(false)
   position            Position           @default(CORINGA)
   accounts            Account[]

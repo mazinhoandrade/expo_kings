@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth/next";
 import React from "react";
 
 import { getGame } from "@/app/_data/get-games";
-import { getUserAdmin } from "@/app/_data/get-users-player";
+import { authOptions } from "@/app/_lib/auth";
 import { GameEdit } from "@/app/types/game";
 import FormEditGame from "@/components/game/formEditGame";
 
@@ -12,8 +13,10 @@ interface Props {
   };
 }
 const Page = async ({ params }: Props) => {
-  const authorization = await getUserAdmin();
-  if (!authorization) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) redirect("/");
+
+  if (!session.user.admin) {
     redirect("/admin/game");
   }
 

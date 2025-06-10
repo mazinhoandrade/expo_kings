@@ -128,7 +128,7 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image',
   admin: 'admin',
   birthday: 'birthday',
-  preapproval_plan_id: 'preapproval_plan_id',
+  subscriptionExpiresAt: 'subscriptionExpiresAt',
   monthlypayment: 'monthlypayment',
   position: 'position',
   createdAt: 'createdAt',
