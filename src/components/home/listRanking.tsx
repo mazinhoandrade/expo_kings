@@ -122,7 +122,10 @@ const ListRanking = () => {
               {!loading &&
                 ranking.length > 0 &&
                 ranking.map((player) => (
-                  <TableRow key={player.id} className={`text-xs capitalize`}>
+                  <TableRow
+                    key={player.id}
+                    className={`text-xs capitalize ${player.monthlypayment ? "border-b-0 border-l-2 border-blue-500" : "border-none"}`}
+                  >
                     <TableCell>{player.name.split(" ")[0]}</TableCell>
                     <TableCell>{player.totalGols}</TableCell>
                     <TableCell>{player.totalAssistances}</TableCell>
@@ -130,6 +133,7 @@ const ListRanking = () => {
                     <TableCell>{player.totalTopcover}</TableCell>
                   </TableRow>
                 ))}
+              <TableRow></TableRow>
               {!loading && ranking.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={5} className="h-24 text-center">

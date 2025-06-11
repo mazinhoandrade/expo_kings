@@ -90,6 +90,7 @@ export async function GET() {
                 name: true,
                 image: true,
                 position: true,
+                monthlypayment: true,
               },
             },
           },

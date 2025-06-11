@@ -8,7 +8,7 @@ import AvatarCover from "./avatarCover";
 
 const CoverTop = () => {
   const [player, setPlayer] = React.useState<
-    Pick<User, "id" | "name" | "image" | "position">[]
+    Pick<User, "id" | "name" | "image" | "position" | "monthlypayment">[]
   >([]);
   const [looding, setLoading] = React.useState(true);
 
@@ -26,7 +26,6 @@ const CoverTop = () => {
     fetchUsers();
   }, []);
 
-  console.log(player);
   return (
     <>
       <h1 className="mx-3 mt-5 text-center text-xl font-bold">
@@ -54,6 +53,7 @@ const CoverTop = () => {
               <AvatarCover
                 image={player[0].image as string}
                 name={player[0].name as string}
+                isMonthly={player[0].monthlypayment}
               />
             </div>
           )}
@@ -65,6 +65,7 @@ const CoverTop = () => {
                 <AvatarCover
                   image={player[1].image as string}
                   name={player[1].name as string}
+                  isMonthly={player[0].monthlypayment}
                 />
               )}
             </div>
@@ -73,6 +74,7 @@ const CoverTop = () => {
                 <AvatarCover
                   image={player[2].image as string}
                   name={player[2].name as string}
+                  isMonthly={player[0].monthlypayment}
                 />
               )}
             </div>
@@ -84,6 +86,7 @@ const CoverTop = () => {
               <AvatarCover
                 image={player[3].image as string}
                 name={player[3].name as string}
+                isMonthly={player[0].monthlypayment}
               />
             </div>
           )}
@@ -94,6 +97,7 @@ const CoverTop = () => {
               <AvatarCover
                 image={player[4].image as string}
                 name={player[4].name as string}
+                isMonthly={player[0].monthlypayment}
               />
             </div>
           )}
