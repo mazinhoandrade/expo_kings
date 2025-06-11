@@ -76,7 +76,11 @@ const InscriptionAlert = ({ User }: Props) => {
             <DialogClose asChild>
               <Button variant="outline">Não Quero</Button>
             </DialogClose>
-            <Button type="submit" onClick={handleSubscribe}>
+            <Button
+              type="submit"
+              className="animate-pulse border-2 border-blue-900 text-blue-900"
+              onClick={handleSubscribe}
+            >
               Assinar Agora
             </Button>
           </DialogFooter>
