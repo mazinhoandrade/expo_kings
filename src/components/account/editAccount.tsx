@@ -1,5 +1,5 @@
 "use client";
-import { ShieldCheck } from "lucide-react";
+import { LogOut, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-
+import { signOut } from "next-auth/react";
 type Props = {
   User: User;
 };
@@ -38,6 +38,10 @@ const EditAccount = ({ User }: Props) => {
       userEmail: User.email,
     });
   };
+
+    const handleLogoutClick = () => {
+      signOut();
+    };
 
   const handleSubmit = async (e: React.FormEvent) => {
     setLoading(true);
@@ -103,6 +107,7 @@ const EditAccount = ({ User }: Props) => {
             </div>
           </div>
         </div>
+        
       </Card>
       <h1 className="text-xl">Editar Perfil</h1>
       <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-2">
@@ -150,6 +155,8 @@ const EditAccount = ({ User }: Props) => {
           </Button>
         </Link>
       )}
+
+      <Button className="mt-4 text w-full" variant={'ghost'} onClick={handleLogoutClick}>Sair da Conta <LogOut /></Button>
     </div>
   );
 };

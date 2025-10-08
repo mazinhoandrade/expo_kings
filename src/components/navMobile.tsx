@@ -1,17 +1,16 @@
 "use client";
 
-import { CirclePlus, House, LogOut, UserPen, Users } from "lucide-react";
+import { CirclePlus, House, UserPen, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 import SignInDialog from "./sign-in-dialog";
+import Image from "next/image";
 
 export const NavMobile = () => {
   const { data } = useSession();
-  const handleLogoutClick = () => {
-    signOut();
-  };
+
   const pathname = usePathname();
 
   const handleLinkClick = (active: string = "") => {
@@ -58,25 +57,25 @@ export const NavMobile = () => {
               !data?.user ? "opacity-50" : ""
             }`}
           >
-            <span className="text-2xl">
-              <UserPen />
-            </span>
+            {data?.user && (
+              <span className="text-2xl">
+                <Image
+                  src={data?.user?.image || ""}
+                  width={30}
+                  height={30}
+                  className="bg-primary rounded-xl p-0.5"
+                  alt={data?.user?.name || ""}
+                />
+              </span>
+            )}
+            {!data?.user && (
+              <span className="text-2xl">
+                <UserPen />
+              </span>
+            )}
             <span className="text-xs">Conta</span>
           </button>
         </Link>
-
-        {data?.user && (
-          <div
-            className="flex flex-col items-center"
-            onClick={handleLogoutClick}
-          >
-            <span className="text-2xl">
-              <LogOut />
-            </span>
-            <span className="text-xs">Sair</span>
-          </div>
-        )}
-        {!data?.user && <SignInDialog />}
       </div>
     </nav>
   );
