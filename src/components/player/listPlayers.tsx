@@ -1,6 +1,6 @@
 "use client";
 import { Search } from 'lucide-react';
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { getListPlayers } from '@/app/_data/get-users-player';
 import { PlayerStats } from '@/app/types/user';
@@ -12,30 +12,48 @@ import CardPlayer from './cardPlayer';
 const ListPlayers = () => {
 
   const [players, setPlayers] = useState<PlayerStats[]>([]);
+  const [allPlayers, setAllPlayers] = useState<PlayerStats[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   
   
   const getPlayers = async () => {
+    setLoading(true);
     const data = await getListPlayers();
     setPlayers(data);
+    setAllPlayers(data);
     setLoading(false);
-  };
-
-  const handleSearch = async (e: string) => {
-    setSearch(e);
-    const playerFilter = players.filter((play) =>
-      play.name.toLowerCase().includes(e.toLowerCase()),
-    );
-    if (e === "") {
-      getPlayers();
-    } 
-    setPlayers(playerFilter);
   };
 
   useEffect(() => {
     getPlayers();
   }, []);
+
+    const debounce = (func: (...args: any[]) => void, delay: number) => {
+    let timer: NodeJS.Timeout;
+    return (...args: any[]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => func(...args), delay);
+    };
+  };
+
+  const handleSearch = useMemo(
+      () =>
+        debounce((value: string) => {
+          setSearch(value);
+  
+          if (value.trim() === "") {
+            setPlayers(allPlayers);
+            return;
+          }
+  
+          const filtered = allPlayers.filter((p) =>
+            p.name.toLowerCase().includes(value.toLowerCase())
+          );
+          setPlayers(filtered);
+        }, 300),
+      [allPlayers]
+    );
 
   return (
     <div className='mt-2'>
