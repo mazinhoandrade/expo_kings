@@ -33,8 +33,7 @@ import { Button } from './ui/button';
           <AlertDialogHeader>
             <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
             <AlertDialogDescription>
-            Esta ação não pode ser desfeita. Isso excluirá permanentemente sua conta
-            e removerá seus dados de nossos servidores.
+              Essa acao nao pode ser desfeita
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

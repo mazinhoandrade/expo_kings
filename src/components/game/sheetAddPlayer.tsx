@@ -37,7 +37,7 @@ const SheetAddPlayer = ({ handleSelecionar }: Props) => {
     setLoading(false);
   };
 
-    useEffect(() => {
+  useEffect(() => {
     getPlayers();
   }, []);
 

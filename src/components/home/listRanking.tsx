@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useMemo } from "react";
 
 const statistics = [
   {
@@ -42,29 +43,49 @@ const statistics = [
 ];
 const ListRanking = () => {
   const [ranking, setRanking] = React.useState<PlayerStats[]>([]);
+  const [rankingAll, setRankingAll] = React.useState<PlayerStats[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = React.useState("");
 
   const getRanking = async () => {
-    //const data = await getListPlayers();
+    setLoading(true);
     const data = await fetch("/api/users/ranking").then((res) => res.json());
     setRanking(data);
+    setRankingAll(data);
     setLoading(false);
   };
   React.useEffect(() => {
     getRanking();
   }, []);
 
-  const handleSearch = async (e: string) => {
-    setSearch(e);
-    const playerFilter = ranking.filter((play) =>
-      play.name.toLowerCase().includes(e.toLowerCase()),
+    const debounce = (func: (...args: any[]) => void, delay: number) => {
+      let timer: NodeJS.Timeout;
+      return (...args: any[]) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => func(...args), delay);
+      };
+    };
+  
+  
+  // Busca otimizada com debounce
+    const handleSearch = useMemo(
+      () =>
+        debounce((value: string) => {
+          setSearch(value);
+  
+          if (value.trim() === "") {
+            setRanking(rankingAll);
+            return;
+          }
+  
+          const filtered = rankingAll.filter((p) =>
+            p.name.toLowerCase().includes(value.toLowerCase())
+          );
+          setRanking(filtered);
+        }, 200),
+      [rankingAll]
     );
-    if (e === "") {
-      getRanking();
-    }
-    setRanking(playerFilter);
-  };
+
   const handleSelectStatistic = (e: string) => {
     const playerFilter = [...ranking].sort((a, b) => b[e] - a[e]);
     setRanking(playerFilter);
@@ -94,6 +115,7 @@ const ListRanking = () => {
                   {option.value}
                 </SelectItem>
               ))}
+              <SelectItem value="monthlypayment">Mensalistas</SelectItem>
             </SelectContent>
           </Select>
         </div>
