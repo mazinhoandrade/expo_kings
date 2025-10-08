@@ -57,7 +57,7 @@ const FormEditGame = ({ game }: Props) => {
       toast.success("Jogo cadastrado com sucesso!");
       reset();
       setDescription("");
-      router.replace("/admin/game");
+      router.replace("/game");
     } else {
       const data = await res.json();
       toast.error(data.message);
@@ -88,7 +88,7 @@ const FormEditGame = ({ game }: Props) => {
   const handleCancelGame = () => {
     reset();
     setDescription("");
-    router.replace("/admin/game");
+    router.replace("/game");
   };
 
   return (

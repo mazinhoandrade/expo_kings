@@ -14,7 +14,7 @@ export default async function AddGame() {
   }
 
   if (!session.user.admin) {
-    redirect("/admin/game");
+    redirect("/game");
   }
 
   const user = await db.user.findUnique({

@@ -8,6 +8,6 @@ export default async function Account() {
   const session = await getServerSession(authOptions);
   if (!session?.user) redirect("/");
 
-  if (!session.user.admin) redirect("/admin/account");
+  if (!session.user.admin) redirect("/account");
   return <EditUsers />;
 }

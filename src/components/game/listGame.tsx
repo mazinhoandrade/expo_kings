@@ -92,7 +92,7 @@ const ListGame = ({ authorization }: Props) => {
                 <TableCell className="flex justify-end gap-2">
                   <Button
                     onClick={() => {
-                      router.push(`/admin/game/${game.id}`);
+                      router.push(`/game/${game.id}`);
                     }}
                   >
                     <Pencil />

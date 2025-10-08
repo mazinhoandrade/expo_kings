@@ -30,8 +30,8 @@ export const NavMobile = () => {
           <span className="text-xs">Início</span>
         </Link>
 
-        <Link href="/admin/players">
-          <button className={`${handleLinkClick("admin/players")}`}>
+        <Link href="/players">
+          <button className={`${handleLinkClick("players")}`}>
             <span className="text-2xl">
               <Users />
             </span>
@@ -39,10 +39,10 @@ export const NavMobile = () => {
           </button>
         </Link>
 
-        <Link href="/admin/game">
+        <Link href="/game">
           <button
             disabled={!data?.user}
-            className={`${handleLinkClick("admin/game")} ${!data?.user ? "opacity-50" : ""} `}
+            className={`${handleLinkClick("game")} ${!data?.user ? "opacity-50" : ""} `}
           >
             <span className="text-2xl">
               <CirclePlus />
@@ -51,10 +51,10 @@ export const NavMobile = () => {
           </button>
         </Link>
 
-        <Link href="/admin/account">
+        <Link href="/account">
           <button
             disabled={!data?.user}
-            className={`${handleLinkClick("admin/account")} ${
+            className={`${handleLinkClick("account")} ${
               !data?.user ? "opacity-50" : ""
             }`}
           >

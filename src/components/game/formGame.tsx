@@ -70,7 +70,7 @@ export default function FormGame() {
       toast.success("Jogo cadastrado com sucesso!");
       reset();
       setDescription("");
-      router.replace("/admin/game");
+      router.replace("/game");
     } else {
       const data = await res.json();
       toast.error(data.message);
@@ -101,7 +101,7 @@ export default function FormGame() {
   const handleCancelGame = () => {
     reset();
     setDescription("");
-    router.replace("/admin/game");
+    router.replace("/game");
   };
 
   return (

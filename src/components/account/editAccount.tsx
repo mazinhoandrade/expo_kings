@@ -144,7 +144,7 @@ const EditAccount = ({ User }: Props) => {
         </Button>
       </form>
       {User.admin && (
-        <Link href="/admin/account/editusers">
+        <Link href="/account/editusers">
           <Button variant={"outline"} className="mt-2 w-full">
             Editar Players
           </Button>

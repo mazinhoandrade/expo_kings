@@ -17,7 +17,7 @@ const Page = async ({ params }: Props) => {
   if (!session?.user) redirect("/");
 
   if (!session.user.admin) {
-    redirect("/admin/game");
+    redirect("/game");
   }
 
   const { id } = await Promise.resolve(params);

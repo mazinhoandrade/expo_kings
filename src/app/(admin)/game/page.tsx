@@ -13,7 +13,7 @@ export default async function Page() {
   return (
     <div>
       {session?.user.admin && (
-        <Link href="/admin/game/addgame">
+        <Link href="/game/addgame">
           <Button className="my-4 w-full">Novo Jogo</Button>
         </Link>
       )}
