@@ -4,8 +4,6 @@ import { CirclePlus, House, UserPen, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-
-import SignInDialog from "./sign-in-dialog";
 import Image from "next/image";
 
 export const NavMobile = () => {
@@ -40,8 +38,7 @@ export const NavMobile = () => {
 
         <Link href="/game">
           <button
-            disabled={!data?.user}
-            className={`${handleLinkClick("game")} ${!data?.user ? "opacity-50" : ""} `}
+            className={handleLinkClick("game")}
           >
             <span className="text-2xl">
               <CirclePlus />
@@ -52,10 +49,7 @@ export const NavMobile = () => {
 
         <Link href="/account">
           <button
-            disabled={!data?.user}
-            className={`${handleLinkClick("account")} ${
-              !data?.user ? "opacity-50" : ""
-            }`}
+            className={handleLinkClick("account")}
           >
             {data?.user && (
               <span className="text-2xl">

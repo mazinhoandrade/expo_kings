@@ -17,18 +17,26 @@ import {
 import DialogApp from "../dialogApp";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
+import { useMemo, useState } from "react";
 
 type CheckboxItem = {
   id: string;
   checked: boolean;
 };
 
+type DataExpire = {
+  id: string;
+  dataexist: Date;
+};
+
 const EditUsers = () => {
-  const [users, setUsers] = React.useState<Omit<User, "statistics">[]>([]);
+  const [users, setUsers] = useState<Omit<User, "statistics">[]>([]);
+  const [allusers, setAllUsers] = useState<Omit<User, "statistics">[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = React.useState("");
 
   const [checkbox, setCheckbox] = React.useState<CheckboxItem[]>([]);
+  const [dataexist, setDataExist] = React.useState<DataExpire[]>([]);
 
   const handleCheckboxChange = (id: string, checked: boolean) => {
     setCheckbox((prevCheckbox) => {
@@ -44,15 +52,44 @@ const EditUsers = () => {
     });
   };
 
+  const handleDataChange = (id: string, data: Date) => {
+    setDataExist((prevData) => {
+      const exists = prevData.some((item) => item.id === id);
+
+      if (exists) {
+        return prevData.map((item) =>
+          item.id === id ? { ...item, dataexist: data } : item,
+        );
+      } else {
+        return [...prevData, { id, dataexist: data }];
+      }
+    });
+  };
+
+  const formatDate = (date?: string | Date) => {
+  if (!date) return "";
+  const d = new Date(date);
+  return d.toISOString().split("T")[0];
+};
+
   const getUsers = async () => {
     const data = await getListUsers();
     setUsers(data);
+    setAllUsers(data);
     setLoading(false);
   };
 
   React.useEffect(() => {
     getUsers();
   }, []);
+
+      const debounce = (func: (...args: any[]) => void, delay: number) => {
+      let timer: NodeJS.Timeout;
+      return (...args: any[]) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => func(...args), delay);
+      };
+    };
 
   const handleDelete = async (id: string) => {
     setLoading(true);
@@ -93,16 +130,24 @@ const EditUsers = () => {
     }
   };
 
-  const handleSearch = async (e: string) => {
-    setSearch(e);
-    const playerFilter = users.filter((play) =>
-      play.name.toLowerCase().includes(e.toLowerCase()),
-    );
-    if (e === "") {
-      getUsers();
-    }
-    setUsers(playerFilter);
-  };
+      const handleSearch = useMemo(
+        () =>
+          debounce((value: string) => {
+            setSearch(value);
+    
+            if (value.trim() === "") {
+              setUsers(allusers);
+              return;
+            }
+    
+            const filtered = allusers.filter((p) =>
+              p.name.toLowerCase().includes(value.toLowerCase())
+            );
+            setUsers(filtered);
+          }, 200),
+        [allusers]
+      );
+
 
   return (
     <>
@@ -126,6 +171,7 @@ const EditUsers = () => {
                 <TableRow>
                   <TableHead>Nome</TableHead>
                   <TableHead>Date</TableHead>
+                  <TableHead>Data de pagamento</TableHead>
                   <TableHead>Torna Mensalista</TableHead>
                   <TableHead>Excluir</TableHead>
                 </TableRow>
@@ -149,6 +195,21 @@ const EditUsers = () => {
                         {new Date(player.birthday).toLocaleDateString("pt-BR", {
                           timeZone: "UTC",
                         })}
+                      </TableCell>
+                      <TableCell>
+                        <Input
+                          type="date"
+                          className="w-full"
+                          value={
+                            formatDate(
+                              dataexist.find((item) => item.id === player.id)?.dataexist ??
+                              player.subscriptionExpiresAt
+                            )
+                          }
+                          onChange={(e) =>
+                            handleDataChange(player.id, new Date(e.target.value))
+                          }
+                        />
                       </TableCell>
                       <TableCell>
                         <Checkbox

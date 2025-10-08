@@ -14,7 +14,9 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ status: 401 });
   }
 
-  const updates: { id: string; monthlypayment: boolean }[] = await req.json();
+  const body = await req.json();
+
+  const updates: { id: string; monthlypayment: boolean }[] = body;
 
   if (!Array.isArray(updates)) {
     return NextResponse.json({ status: 400, message: "Formato inválido" });
@@ -25,7 +27,10 @@ export async function PATCH(req: Request) {
       updates.map((update) =>
         db.user.update({
           where: { id: update.id },
-          data: { monthlypayment: update.monthlypayment },
+          data: { 
+            monthlypayment: update.monthlypayment,
+            //subscriptionExpiresAt: update.subscriptionExpiresAt
+           },
         }),
       ),
     );

@@ -9,6 +9,7 @@ export interface User {
   birthday: Date;
   monthlypayment: boolean;
   position: string;
+  subscriptionExpiresAt: Date;
   statistics: PlayerStatistics[];
   createdAt?: Date;
   updatedAt?: Date;
