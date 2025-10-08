@@ -15,7 +15,7 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user }) {
-      const LIMITE_USER = 30;
+      const LIMITE_USER = parseInt(process.env.SIGNUP_LIMIT as string);
 
       const usersExists = await db.user.findUnique({
         where: {
