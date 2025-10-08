@@ -2,7 +2,7 @@
 
 import { Search, ShieldCheck, Volleyball } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { getListUsers } from "@/app/_data/get-users-player";
 import { User } from "@/app/types/user";
@@ -27,33 +27,52 @@ const SheetAddPlayer = ({ handleSelecionar }: Props) => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [players, setPlayers] = useState<Omit<User, "statistics">[]>([]);
+  const [allPlayers, setAllPlayers] = useState<Omit<User, "statistics">[]>([]);
 
-  const getExercise = async () => {
+  const getPlayers = async () => {
+    setLoading(true);
     const data = await getListUsers();
     setPlayers(data);
+    setAllPlayers(data);
     setLoading(false);
   };
 
-  const handleSearch = async (e: string) => {
-    setSearch(e);
-    setLoading(true);
-    const playerFilter = players.filter((play) =>
-      play.name.toLowerCase().includes(e.toLowerCase()),
-    );
-    if (e === "") {
-      getExercise();
-    }
-    setPlayers(playerFilter);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getExercise();
+    useEffect(() => {
+    getPlayers();
   }, []);
 
-  const handleSelectExercise = (name: string, id: string) => {
+  // Função debounce simples
+  const debounce = (func: (...args: any[]) => void, delay: number) => {
+    let timer: NodeJS.Timeout;
+    return (...args: any[]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => func(...args), delay);
+    };
+  };
+
+
+// Busca otimizada com debounce
+  const handleSearch = useMemo(
+    () =>
+      debounce((value: string) => {
+        setSearch(value);
+
+        if (value.trim() === "") {
+          setPlayers(allPlayers);
+          return;
+        }
+
+        const filtered = allPlayers.filter((p) =>
+          p.name.toLowerCase().includes(value.toLowerCase())
+        );
+        setPlayers(filtered);
+      }, 300),
+    [allPlayers]
+  );
+
+  const handleSelectPlayer = (name: string, id: string) => {
     handleSelecionar({ id, name });
-    //setOpen(false);
+    // setOpen(false);
   };
 
   return (
@@ -71,7 +90,7 @@ const SheetAddPlayer = ({ handleSelecionar }: Props) => {
           <Input
             type="text"
             onChange={(e) => handleSearch(e.target.value)}
-            value={search}
+            defaultValue={search}
             placeholder="Procurar por nome"
             className="p-2"
           />
@@ -90,7 +109,7 @@ const SheetAddPlayer = ({ handleSelecionar }: Props) => {
                 players.map((ex) => (
                   <li
                     className="cursor-pointer"
-                    onClick={() => handleSelectExercise(ex.name, ex.id)}
+                    onClick={() => handleSelectPlayer(ex.name, ex.id)}
                     key={ex.id}
                   >
                     <div
